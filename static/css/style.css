@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    font-family: Calibri, sans-serif;
+    font-size: 24px;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 15vh;
+    flex-direction: column;
+    background: lightgray;
+    color: black;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    /* Removed height: 100vh so the container wraps tightly around its con  tent */
+    padding: 15px;
+}
+
+/* Chat container */
+#chat {
+    /* Removed flex: 1 to stop it from pushing the input bar away */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Reduced padding to bring the text and input bar closer together */
+    padding: 40px 20px; 
+    text-align: center;
+}
+
+/* Input container */ 
+.input-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: lightgray;
+    padding: 10px;
+    margin: 10px 15px; 
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+/* Textbox */
+#message {
+    flex: 1;
+    padding: 10px;
+    border: none; 
+    outline: none;
+    border-radius: 8px;
+    background: lightgray;
+    font-size: 16px; 
+}
+
+/* Send button */
+#send {
+    margin-left: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #4caf50;
+    color: white;
+    font-size: 16px;
+}
+
+/* Animation for button hover */
+#send:hover {
+    background: #45a049;
+}
+
+/* Animation for button click */
+#send:active {
+    background: #388e3c;
+}

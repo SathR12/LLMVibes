@@ -1,6 +1,6 @@
 import requests
 import re
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -47,13 +47,7 @@ def sentiment_score(text):
 # Routes
 @app.route("/")
 def home():
-    return """
-    <h1>VibeCheck API</h1>
-    <form action="/test" method="post">
-        <input name="message">
-        <button type="submit">Send</button>
-    </form>
-    """
+    return render_template("index.html")
 
 @app.route("/test", methods=["POST"])
 def test():
@@ -77,25 +71,16 @@ def chat():
     user_message = request.json["message"]
 
     try:
-        response = requests.post(
-            OLLAMA_URL,
-            json={
-                "model": "vibecheck",
-                "prompt": user_message,
-                "stream": False
-            }
-        )
+        raw_output = get_raw_output(user_message)
+        score = extract_score(raw_output)
 
-        data = response.json()
         return jsonify({
-            "reply": data["response"]
+            "reply": raw_output,
+            "score": score
         })
 
     except Exception as e:
-        return jsonify({
-            "error": str(e)
-        }), 500
-
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/sentiment", methods=["POST"])
 def sentiment():
